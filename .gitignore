@@ -1,6 +1,7 @@
 # capstone specific
 notebook.tex
 input
+*.joblib
 
 # Mac OS
 .DS_Store

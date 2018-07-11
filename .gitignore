@@ -2,6 +2,7 @@
 notebook.tex
 input
 *.joblib
+.~lock.report.odt#
 
 # Mac OS
 .DS_Store

@@ -3,6 +3,7 @@ notebook.tex
 input
 *.joblib
 .~lock.report.odt#
+isolation_forest_outliers.npy
 
 # Mac OS
 .DS_Store

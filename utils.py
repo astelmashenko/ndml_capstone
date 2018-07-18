@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+from os import path
+
+src_path = path.dirname(path.realpath(__file__))
 
 
 def compute_missing_values(df):
@@ -11,12 +14,25 @@ def compute_missing_values(df):
 
 
 def outliers_iqr(ys, k=1.5):
-    quartile_1, quartile_3 = np.percentile(ys, [25, 75])
-    iqr = quartile_3 - quartile_1
-    lower_bound = quartile_1 - (iqr * k)
-    upper_bound = quartile_3 + (iqr * k)
-    return np.where((ys > upper_bound) | (ys < lower_bound))
+  quartile_1, quartile_3 = np.percentile(ys, [25, 75])
+  iqr = quartile_3 - quartile_1
+  lower_bound = quartile_1 - (iqr * k)
+  upper_bound = quartile_3 + (iqr * k)
+  return np.where((ys > upper_bound) | (ys < lower_bound))
 
+
+def idx_of_missing_values(df, threshold=90):
+  to_remove = []
+  for idx, row in df.iterrows():
+    if row['NaN %'] > threshold:
+      to_remove.append(idx)
+  return to_remove  
+
+
+def save_prediction(data, name):
+    file_path = '%s/submissions/submission-%s.csv' % (src_path, name)
+    data[['SK_ID_CURR', 'TARGET']].to_csv(file_path, index=False)
+    return 'kaggle competitions submit -c home-credit-default-risk -f %s -m "%s"' % (file_path, name)
 
 ####
 

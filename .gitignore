@@ -4,6 +4,7 @@ input
 *.joblib
 .~lock.report.odt#
 isolation_forest_outliers.npy
+*.hdf5
 
 # Mac OS
 .DS_Store
